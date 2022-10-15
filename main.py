@@ -62,10 +62,12 @@ def get_category_courses(category_page: str) -> list:
         {
             "name": "category_name",
             "selector": "a[aria-current=page][data-track-component=breadcrumb_link]",
+            "default": ""
         },
         {
             "name": "course_name",
             "selector": "h1.banner-title",
+            "default": ""
         },
         {
             "name": "first_instructor",
@@ -75,15 +77,19 @@ def get_category_courses(category_page: str) -> list:
         {
             "name": "course_description",
             "selector": "div.description",
+            "postprocessors": [ReplaceWith('\n', '')],  # remove the new lines
+            "default": ""
         },
         {
             "name": "number_of_students",
             "selector": ".rc-ProductMetrics strong>span",
             "postprocessors": [ReplaceWith(',', '')],  # just to remove the comma
+            "default": ""
         },
         {
             "name": "number_of_ratings",
             "selector": "[data-test=ratings-count-without-asterisks]>span",
+            "default": "",
             "postprocessors": [
                 ReplaceWith(",", ""),
                 ReplaceWith("ratings", ""),
